@@ -31,9 +31,9 @@
 				return null;
 			}
 		}
-		public function detail($id_calon)
+		public function detail($kode_pasangan)
 		{
-			$this->db->where('id_calon',$id_calon);
+			$this->db->where('kode_pasangan',$kode_pasangan);
 			$query=$this->db->get('calon');
 			if($query)
 			{

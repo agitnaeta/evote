@@ -1,4 +1,4 @@
-<?php foreach ($calon->result() as $row):?>
+
 <div id="fd" class="container">
 	<div class="row clearfix">
 			<div class="col-md-12 konten">
@@ -16,8 +16,13 @@
 		<div class="panel-heading">
 			<h3>Detail Calon</h3>
 		</div>
+		<div class="bg-primary col-md-6 text-center"><h4>Ketua</h4></div>
+		<div class="bg-info col-md-6 text-center"><h4>Wakil Ketua</h4></div>
+		<?php foreach ($calon->result() as $row):?>
+			
+			<div class="col-md-6">
 			<div class="panel-body">
-				<img  src="<?php echo base_url('src/img/');?><?php echo "/$row->foto";?>" class="img-responsive img img-square">
+				<img  src="<?php echo base_url('src/img/');?><?php echo "/$row->foto";?>" class="img-responsive img-rounded img">
 			</div>
 			<div class="panel-body">
 				<label>Nama</label><br>
@@ -28,9 +33,16 @@
 				<?php echo $row->semester;?><br>
 				<label>IPK</label><br>
 				<?php echo $row->ipk;?><br>
-				<label>Visi Misi</label><br>
-				<?php echo $row->visi_misi;?>
-				</div>
+			</div>
+			</div>
+			<?php endforeach;?>	
+			<div class="panel-body">
+				<label class="text-center">Visi Misi</label>
+				<hr>
+			<?php foreach ($pasangan->result() as $row):?>
+				<?php echo $row->visi_misi;?><br>
+			<?php endforeach;?>	
+			</div>
 			<div class="panel-footer">
 			<div class="text-right">
 				<a title="Pilih" class="btn btn-primary"> 
@@ -44,4 +56,4 @@
 		</div>		
 	</div>
 </div>
-<?php endforeach;?>
+

@@ -2,6 +2,54 @@
 
 <head>
 	<title>Evote - Daftar Calon</title>
+	<script type="text/javascript">
+	$(document).ready(function  () {
+		$("#error").hide();
+		$("#one").hide();
+		$("#wakil").keyup(function  () {
+			var nim=$("#wakil").val()
+			var ketua=$("#ketua").val()
+			if (nim.length!=10) {
+				$.post('<?php echo site_url('mahasiswa/home/handleNull');?>',{nim:nim},function (data) {
+					$("#nama").val(data);
+					$("#jurusan").val(data);
+					$("#semester").val(data);
+					$("#ipk").val(data);
+					$("#error").show();
+					$("button#simpan").hide();
+					$("#one").hide();
+				})
+			}
+			else
+			{
+				if (nim==ketua) {
+					$("#one").show();
+						$("#error").hide();
+				}
+				else
+				{
+					$.post('<?php echo site_url('mahasiswa/home/cari');?>',{nim:nim,ketua:ketua},function (data) {
+					var obj = JSON.parse(data);
+					$("#nama").val(obj[0].nama);
+					$("#jurusan").val(obj[0].jurusan);
+					$("#semester").val(obj[0].semester);
+					$("#ipk").val(obj[0].ipk);
+					$("#error").hide();
+					$("#one").hide();
+					$("#simpan").show();
+					})
+				}	
+			}
+		})
+	})
+</script>
+	<script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+	<script type="text/javascript">
+tinymce.init({
+    selector: "textarea",
+    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent"
+});
+</script>
 </head>
 <body>
 <?php foreach ($calon->result() as $row):?>
@@ -12,22 +60,27 @@
 				<h1 class="text-muted"><i class="glyphicon glyphicon-leaf"></i> Evote<small>~Daftar Calon</small></h1>
 				</div>
 			</nav>
-			</div>
+			<br>
+			<br>
+			<br>
+
+		</div>
 	<div class="col-md-12">
 	<div class="panel panel-default">
 		<div class="panel-footer">
 			<h3>Daftar Calon</h3>
-			
 		</div>
-		<form class="form-group" method="post" action="">
+		<?php echo form_open_multipart('calon/daftar_calon');?>
 		<div class="panel-body">
+		
 			<table class="table">
 				<tr>
 					<td>
 						<div class="panel-footer">Calon Ketua</div>
 						<div class="panel-body">
 							<label>NIM</label>
-							<input value="<?php echo "$row->nim";?>" readonly class="form-control" type="text" name="nim" required>
+
+							<input id="ketua" value="<?php echo "$row->nim";?>" readonly class="form-control" type="text" name="nimketua" required>
 							<label>Nama</label>
 							<input value="<?php echo "$row->nama";?>" readonly class="form-control" type="text" name="nama" required>
 							<label>Jurusan</label>
@@ -51,7 +104,9 @@
 						<div class="panel-footer">Calon Wakil Ketua</div>
 						<div class="panel-body">
 							<label>NIM</label>
-							<input id="wakil"  class="form-control" type="text" name="nim" required>
+							<input id="wakil"  class="form-control" type="text" name="nimwakil" required>
+							<div id="error" role="alert"class="alert alert-danger">Data Yang Dimasukan Salah!</div>
+							<div id="one" role="alert" class="alert alert-danger">Anda Tidak Bisa Daftar Sendiri!</div>
 							<label>Nama</label>
 							<input id="nama" readonly class="form-control" type="text" name="nama" required>
 							<label>Jurusan</label>
@@ -87,7 +142,7 @@
 				Kembali</a>
 			
 				<div class="pull-right">
-					<button type="submit" class="btn btn-lg btn-primary">
+					<button id="simpan" type="submit" class="btn btn-lg btn-primary">
 						<i class="glyphicon glyphicon-ok"></i>
 					Simpan</button>
 					<button class="btn btn-lg btn-danger">
@@ -102,28 +157,3 @@
 </div>
 <?php endforeach;?>
 </body>
-<script type="text/javascript">
-	$(document).ready(function  () {
-		$("#wakil").keyup(function  () {
-			var nim=$("#wakil").val()
-			if (nim.length!=10) {
-				$.post('<?php echo site_url('mahasiswa/home/handleNull');?>',{nim:nim},function (data) {
-					$("#nama").val(data);
-					$("#jurusan").val(data);
-					$("#semester").val(data);
-					$("#ipk").val(data);
-				})
-			}
-			else
-			{
-					$.post('<?php echo site_url('mahasiswa/home/cari');?>',{nim:nim},function (data) {
-					var obj = JSON.parse(data);
-					$("#nama").val(obj[0].nama);
-					$("#jurusan").val(obj[0].jurusan);
-					$("#semester").val(obj[0].semester);
-					$("#ipk").val(obj[0].ipk);
-					})	
-			}
-		})
-	})
-</script>

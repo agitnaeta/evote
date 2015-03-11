@@ -20,10 +20,9 @@
 <div class="container">
 	<div class="row clearfix">
 		<div class="col-md-12 text-center">
-			<h1 class="text-muted">
-				E-Vote <small>~Tentukan Pilihanmu</small>
-			</h1>
-			<hr>
+			<br>
+			<br>
+			<br>
 		</div>
 		<div class="col-md-4"></div>
 		<div class="col-md-4">

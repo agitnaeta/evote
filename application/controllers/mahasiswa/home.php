@@ -9,6 +9,8 @@ session_start();
 			if(!empty($this->session->userdata('mahasiswa')))
 			{
 				$this->load->model('datamhs');
+				$this->load->model('datapasangan');
+				$this->load->helper('status_helper');
 			}
 			else
 			{
@@ -21,14 +23,17 @@ session_start();
 			$this->load->view('style');
 			$session_data=$this->session->userdata('mahasiswa');  
 	        $data['nama']=$session_data['nama'];  
-	        $data['nim']=$session_data['nim'];  
-	        $data['calon']=$this->datacalon->all();
+	        $data['nim']=$session_data['nim']; 
+	        $nim=$data['nim']; 
+	        $data['mhs']=$this->datamhs->one($nim); 
+	        $data['calon']=$this->datapasangan->all();
 			$this->load->view('mahasiswa/beranda',$data);
 		}
-		function detail($id_calon)
+		function detail($kode_pasangan)
 		{
 			$this->load->view('style');
-			$data['calon']=$this->datacalon->detail($id_calon);
+			$data['calon']=$this->datacalon->detail($kode_pasangan);
+			$data['pasangan']=$this->datapasangan->detail($kode_pasangan);
 			$this->load->view('mahasiswa/detail',$data);
 		}
 		function daftar($nim)
@@ -40,8 +45,9 @@ session_start();
 		public function cari()
 		{
 			$nim=$this->input->post('nim');
+			$ketua=$this->input->post('ketua');
 			if (trim(!empty(strlen($nim)!=10))) {
-				echo "Data Tidak DItemukan";
+				echo "Data Tidak Ditemukan";
 			}
 			else
 			{

@@ -1,11 +1,19 @@
-<?php foreach ($calon->result() as $row):?>
-<div class="col-xs-4">
+
+<?php $no=1; foreach ($calon->result() as $row):?>
+<div class="col-md-4">
 <div class="panel panel-primary">
-	<div  class="panel-body">
-		
-		<img height="100" width="100" src="<?php echo base_url('src/img/');?><?php echo "/$row->foto";?>" class="img-circle img">
-		<div class="pull-right">
-		<?php echo $row->nama;?>
+
+	<div class="panel-body text-center">
+		<span class="badge">
+		<?php echo $no++;?>
+		</span>
+	</div>
+	<div class="panel-body ">
+		<div class="center"></div>
+		<img src="<?php echo base_url('src/img/');?><?php echo "/$row->foto";?>" class="img-responsive img-thumbnail img">
+		<hr>
+		<div class="text-center">
+		<?php echo $row->nama_pasangan;?>
 		</div> 
 	</div>
 	
@@ -14,7 +22,7 @@
 		<a title="Pilih" class="btn btn-primary"> 
 			<i class="glyphicon glyphicon-ok"></i>
 		</a>
-		<a  id="detail" href="<?php echo site_url('mahasiswa/home/detail');echo "/$row->id_calon";?>" title="Lihat Detail" class="btn btn-info">
+		<a  id="detail" href="<?php echo site_url('mahasiswa/home/detail');echo "/$row->kode_pasangan";?>" title="Lihat Detail" class="btn btn-info">
 			<i class="glyphicon glyphicon-eye-open"></i>
 		</a>
 	</div>

@@ -31,7 +31,7 @@
 								'nip'=>$row->nip,
 								'nama'=>$row->nama);
 							$this->session->set_userdata('lembaga',$sess_array);
-							redirect('lembaga/utama','refresh');
+							redirect('lembaga/beranda','refresh');
 					}
 					else
 					{
@@ -40,10 +40,10 @@
 							$sess_array=array();
 							foreach ($admin as $row)
 								$sess_array=array(
-									'nim'=>$row->nim,
-									'nama'=>$row->nama);
+									'username'=>$row->username,
+									'password'=>$row->password);
 							$this->session->set_userdata('admin',$sess_array);
-							redirect('admin/utama','refresh');
+							redirect('admin/beranda','refresh');
 						}
 						else
 						{
@@ -65,6 +65,16 @@
 			if (!empty($this->session->userdata('mahasiswa'))) {
 				$this->session->unset_userdata('mahasiswa');
 				$this->session->set_flashdata('pesan','Anda Berhasil Keluar!');
+				redirect('home');
+			}
+			elseif (!empty($this->session->userdata('admin'))) {
+				$this->session->unset_userdata('admin');
+				$this->session->set_flashdata('pesan','Anda Berhasil Keluar!');
+				redirect('home');
+			}
+			else
+			{
+				$this->session->set_flashdata('pesan','Anda Gagal Keluar!');
 				redirect('home');
 			}
 		}

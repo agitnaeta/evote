@@ -2,9 +2,9 @@
 	<title>Evote | Home</title>
 </head>
 <body>
-	<div class="container konten">
+	<div class="container ">
 		<div class="row clearfix">
-			<div class="col-md-12 konten">
+			<div class="col-md-12 ">
 			<nav>
 				<div class="nav navbar-fixed-top navbar-default text-center">
 				<h1 class="text-muted"><i class="glyphicon glyphicon-leaf"></i> Evote<small>~STMIK Sumedang</small></h1>
@@ -22,7 +22,9 @@
 					<img src="<?php echo base_url();?>src/img/lk.jpg" class="img-responsive img-circle img"/>
 					<div class="pull-right">
 					<h3 class="text-center"><?php echo $nama;?> </h3>
-					<p class="text-warning">(Belum Memilih)</p>
+					<?php foreach ($mhs->result() as $row):?>
+					<?php echo status($row->status_pilih);?>
+					<?php endforeach;?>
 					</div>
 				</div>
 			</div>
@@ -61,9 +63,6 @@
 				
 			</div>
 			<div id="konten" class="col-md-8">
-				<div>
-					<?php echo $this->session->flashdata('belum') ?>
-				</div>
 				<?php include 'calon.php';?>
 			</div>
 			<div class="col-md-12">
@@ -91,8 +90,7 @@
 				$("#konten").hide();
 				$("#panduan").fadeIn("slow");
 				return false;	
-			})
-
+			})	
 		})
 	</script>
 </body>
