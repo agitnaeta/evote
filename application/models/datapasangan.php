@@ -30,4 +30,17 @@
 				return null;
 			}
 		}
+		public function baru()
+		{
+			$status=0;
+			$this->db->where('status_pasangan',$status);
+			$query=$this->db->get('pasangan');
+			if ($query->num_rows>0) {
+				return $query;
+			}
+			else
+			{
+				return null;
+			}
+		}
 	}

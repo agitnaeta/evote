@@ -43,13 +43,14 @@
 		})
 	})
 </script>
-	<script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
-	<script type="text/javascript">
+<script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+<script type="text/javascript">
 tinymce.init({
     selector: "textarea",
     toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent"
 });
 </script>
+
 </head>
 <body>
 <?php foreach ($calon->result() as $row):?>
@@ -69,11 +70,16 @@ tinymce.init({
 	<div class="panel panel-default">
 		<div class="panel-footer">
 			<h3>Daftar Calon</h3>
+			<div class="pull-riht">
+				<?php echo $this->session->flashdata('pesan');?>
+			</div>
 		</div>
-		<?php echo form_open_multipart('calon/daftar_calon');?>
+		<?php echo form_open_multipart('calon/calon/daftar_calon');?>
 		<div class="panel-body">
-		
 			<table class="table">
+			<tr class="bg-success">
+				<td colspan="2"> <i class="glyphicon glyphicon-user"></i> Keperluan Pribadi</td>
+			</tr>
 				<tr>
 					<td>
 						<div class="panel-footer">Calon Ketua</div>
@@ -82,21 +88,21 @@ tinymce.init({
 
 							<input id="ketua" value="<?php echo "$row->nim";?>" readonly class="form-control" type="text" name="nimketua" required>
 							<label>Nama</label>
-							<input value="<?php echo "$row->nama";?>" readonly class="form-control" type="text" name="nama" required>
+							<input value="<?php echo "$row->nama";?>" readonly class="form-control" type="text" name="namaketua" required>
 							<label>Jurusan</label>
-							<input value="<?php echo "$row->jurusan";?>" readonly class="form-control" type="text" name="jurusan" required>
+							<input value="<?php echo "$row->jurusan";?>" readonly class="form-control" type="text" name="jurusanketua" required>
 							<label>Semester</label>
-							<input value="<?php echo "$row->semester";?>" readonly class="form-control" type="text" name="semester" requred>
+							<input value="<?php echo "$row->semester";?>" readonly class="form-control" type="text" name="semesterketua" requred>
 							<label>IPK</label>
-							<input value="<?php echo "$row->ipk";?>" type="text" name="ipk" class="form-control" readonly required>
+							<input value="<?php echo "$row->ipk";?>" type="text" name="ipkketua" class="form-control" readonly required>
 							<label>Foto</label>
-							<input  type="file" name="foto" required>
+							<input class="form-control"  type="file" name="fotoketua">
 							<label>Surat Keterangan Ukm</label>
-							<input  type="file" name="ukm" required>
+							<input class="form-control"  type="file" name="ukmketua">
 							<label>Sertifikat LDKM</label>
-							<input type="file"  name="ldkm" required>
+							<input class="form-control" type="file"  name="ldkmketua">
 							<label>Surat Izin Orang Tua</label>
-							<input type="file"  name="surat_izin" required>
+							<input class="form-control" type="file"  name="surat_izinketua">
 							
 						</div>
 					</td>
@@ -116,15 +122,27 @@ tinymce.init({
 							<label>IPK</label>
 							<input id="ipk" type="text" name="ipk" class="form-control" readonly required>
 							<label>Foto</label>
-							<input  type="file" name="foto" required>
+							<input class="form-control"  type="file" name="foto">
 							<label>Surat Keterangan Ukm</label>
-							<input  type="file" name="ukm" required>
+							<input class="form-control"  type="file" name="ukm">
 							<label>Sertifikat LDKM</label>
-							<input type="file"  name="ldkm" required>
+							<input class="form-control" type="file"  name="ldkm">
 							<label>Surat Izin Orang Tua</label>
-							<input type="file"  name="surat_izin" required>
+							<input class="form-control" type="file"  name="surat_izin">
 						</div>
 					</td>
+				</tr>
+				<tr class="bg-success">
+					<td colspan="2">
+					<i class="glyphicon glyphicon-home"></i>
+						Keperluan Pasangan
+					</td>
+				</tr>
+				<tr>
+				<td>
+				<label>Foto Pasangan</label>
+					<input class="form-control" type="file" name="foto_pasangan">
+				</td>
 				</tr>
 				<tr>
 					<td colspan="2">
@@ -157,3 +175,4 @@ tinymce.init({
 </div>
 <?php endforeach;?>
 </body>
+ 

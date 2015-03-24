@@ -1,5 +1,5 @@
-<link href="<?php echo base_url()?>src/css/bootstrap.css" rel="stylesheet">
-<link href="<?php echo base_url()?>src/css/bootflat.min.css" rel="stylesheet">
+<link href="<?php echo base_url()?>src/css/bootstrap.min.css" rel="stylesheet">
+<link href="<?php echo base_url()?>src/css/sb-admin.css" rel="stylesheet">
 <link href="<?php echo base_url()?>src/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href="<?php echo base_url()?>src/css/plugins/morris.css" rel="stylesheet">
 
